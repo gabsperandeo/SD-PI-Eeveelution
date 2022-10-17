@@ -1,0 +1,148 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://Scenes/Espeon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/others/TileMap.tscn" type="PackedScene" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Cores/daylight.png" type="Texture" id=4]
+[ext_resource path="res://BarrierAndButton.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Backgrounds/Fase1.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/frutas/payapa.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Umbreon.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Music/MusicTheme.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/frutas/rowap.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/others/DoorUmbreon.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/obstacles/BarrierAndButtonHoriRed.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/others/DoorEspeon.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/obstacles/Foco de Escuridão.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/obstacles/Foco de Luz.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Níveis/Doors.gd" type="Script" id=18]
+
+[sub_resource type="GDScript" id=30]
+script/source = "extends Node2D
+
+export var finished : bool
+export var next_scene : String
+export var reset_var : bool
+
+func _ready():
+	finished = false
+	next_scene = \"res://Níveis/Level_02.tscn\"
+
+func reset():
+	reset_var = true
+
+func _process(delta):
+	if $Doors.finished:
+		finished = true
+	else:
+		finished = false
+"
+
+[sub_resource type="Shader" id=29]
+code = "shader_type canvas_item;
+
+uniform sampler2D color_texture;
+
+void fragment()
+{
+	vec2 data = texture(SCREEN_TEXTURE, SCREEN_UV).rg;
+	if(data.g > 0.0)
+	{
+		discard;
+	}
+	
+	COLOR = texture(color_texture, vec2(data.r, 0.0));
+}"
+
+[sub_resource type="ShaderMaterial" id=28]
+shader = SubResource( 29 )
+shader_param/color_texture = ExtResource( 4 )
+
+[node name="Level_01" type="Node2D"]
+script = SubResource( 30 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Daylight" type="Sprite" parent="ParallaxBackground"]
+position = Vector2( 317.6, 198 )
+scale = Vector2( 0.398095, 0.398095 )
+texture = ExtResource( 6 )
+
+[node name="Music" parent="." instance=ExtResource( 9 )]
+
+[node name="Doors" type="Node2D" parent="."]
+position = Vector2( 626, 50 )
+script = ExtResource( 18 )
+
+[node name="DoorEspeon" parent="Doors" instance=ExtResource( 14 )]
+position = Vector2( -21, 1 )
+
+[node name="DoorUmbreon" parent="Doors" instance=ExtResource( 12 )]
+position = Vector2( -1, 1 )
+
+[node name="Obstacles" type="Node2D" parent="."]
+position = Vector2( -19, 128 )
+
+[node name="Foco de Luz" parent="Obstacles" instance=ExtResource( 16 )]
+position = Vector2( 593, -5 )
+
+[node name="Foco de Escuridão" parent="Obstacles" instance=ExtResource( 15 )]
+position = Vector2( 75, -9 )
+
+[node name="BarrierAndButton" parent="Obstacles" instance=ExtResource( 5 )]
+
+[node name="Button" parent="Obstacles/BarrierAndButton" index="0"]
+position = Vector2( 558, 12 )
+
+[node name="Barrier" parent="Obstacles/BarrierAndButton" index="1"]
+position = Vector2( 72, 48 )
+
+[node name="ButtonPressed" parent="Obstacles/BarrierAndButton" index="3"]
+position = Vector2( 558, 13 )
+
+[node name="BarrierS" parent="Obstacles/BarrierAndButton" index="4"]
+position = Vector2( 72, 48 )
+
+[node name="BarrierAndButtonHoriRed" parent="Obstacles" instance=ExtResource( 13 )]
+
+[node name="Button" parent="Obstacles/BarrierAndButtonHoriRed" index="0"]
+position = Vector2( 93, 59 )
+
+[node name="Barrier" parent="Obstacles/BarrierAndButtonHoriRed" index="1"]
+position = Vector2( 627, 26 )
+
+[node name="ButtonPressed" parent="Obstacles/BarrierAndButtonHoriRed" index="3"]
+position = Vector2( 204, 124 )
+
+[node name="TileMap" parent="." instance=ExtResource( 2 )]
+
+[node name="Mask" type="Sprite" parent="."]
+material = SubResource( 28 )
+position = Vector2( 337, 179 )
+scale = Vector2( 11.3906, 6.6875 )
+texture = ExtResource( 3 )
+
+[node name="Players" type="Node2D" parent="."]
+
+[node name="Espeon" parent="Players" instance=ExtResource( 1 )]
+position = Vector2( 19, 226 )
+
+[node name="Umbreon" parent="Players" instance=ExtResource( 8 )]
+position = Vector2( 23, 285 )
+
+[node name="Fruits" type="Node2D" parent="."]
+
+[node name="payapa" parent="Fruits" instance=ExtResource( 7 )]
+position = Vector2( 190, 114 )
+
+[node name="payapa2" parent="Fruits" instance=ExtResource( 7 )]
+position = Vector2( 238, 126 )
+
+[node name="rowap" parent="Fruits" instance=ExtResource( 10 )]
+position = Vector2( 240, 114 )
+
+[node name="rowap2" parent="Fruits" instance=ExtResource( 10 )]
+position = Vector2( 187, 128 )
+
+[editable path="Obstacles/BarrierAndButton"]
+[editable path="Obstacles/BarrierAndButtonHoriRed"]
