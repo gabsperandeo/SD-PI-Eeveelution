@@ -1,0 +1,230 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Sprites/Botões/button-wide-green.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Obstáculos/barrier.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/BarrierAndButton.gd" type="Script" id=3]
+[ext_resource path="res://Sounds/Button.ogg" type="AudioStream" id=4]
+[ext_resource path="res://Sounds/Barrier.ogg" type="AudioStream" id=5]
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 8, 1.5 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 7, 4.5 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 4, 18.5 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "BarrierAction"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Barrier:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Barrier/sb_barrier/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "BarrierClosed"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Barrier:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 9 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "ButtonDown"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Button:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Button:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 1 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "ButtonUp"
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Button:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Button:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 1 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Button:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Button:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Barrier:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Barrier/sb_barrier/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[node name="BarrierAndButton" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Button" type="Sprite" parent="."]
+position = Vector2( 118, 121 )
+texture = ExtResource( 1 )
+hframes = 3
+frame = 1
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="sb_button" type="StaticBody2D" parent="Button"]
+collision_layer = 2
+collision_mask = 17
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Button/sb_button"]
+position = Vector2( 0, 6.5 )
+shape = SubResource( 9 )
+
+[node name="Area2D" type="Area2D" parent="Button"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Button/Area2D"]
+position = Vector2( 0, 0.5 )
+shape = SubResource( 2 )
+
+[node name="Barrier" type="Sprite" parent="."]
+position = Vector2( 91, 112 )
+texture = ExtResource( 2 )
+hframes = 10
+frame = 1
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="sb_barrier" type="StaticBody2D" parent="Barrier"]
+collision_layer = 10
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Barrier/sb_barrier"]
+position = Vector2( 0, -0.5 )
+shape = SubResource( 3 )
+
+[node name="Animations" type="AnimationPlayer" parent="."]
+autoplay = "BarrierClosed"
+anims/BarrierAction = SubResource( 4 )
+anims/BarrierClosed = SubResource( 5 )
+anims/ButtonDown = SubResource( 6 )
+anims/ButtonUp = SubResource( 7 )
+anims/RESET = SubResource( 8 )
+
+[node name="ButtonPressed" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 118, 121 )
+stream = ExtResource( 4 )
+volume_db = -15.0
+
+[node name="BarrierS" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 91, 113 )
+stream = ExtResource( 5 )
+volume_db = -20.0
+
+[connection signal="body_entered" from="Button/Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Button/Area2D" to="." method="_on_Area2D_body_exited"]
