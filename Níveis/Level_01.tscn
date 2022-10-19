@@ -38,7 +38,7 @@ func _process(delta):
 		finished = false
 "
 
-[sub_resource type="Shader" id=29]
+[sub_resource type="Shader" id=31]
 code = "shader_type canvas_item;
 
 uniform sampler2D color_texture;
@@ -55,7 +55,7 @@ void fragment()
 }"
 
 [sub_resource type="ShaderMaterial" id=28]
-shader = SubResource( 29 )
+shader = SubResource( 31 )
 shader_param/color_texture = ExtResource( 4 )
 
 [node name="Level_01" type="Node2D"]

@@ -160,10 +160,10 @@ texture = ExtResource( 15 )
 [node name="Players" type="Node2D" parent="."]
 
 [node name="Espeon" parent="Players" instance=ExtResource( 4 )]
-position = Vector2( 10, 15 )
+position = Vector2( 15, 13 )
 
 [node name="Umbreon" parent="Players" instance=ExtResource( 6 )]
-position = Vector2( 627, 15 )
+position = Vector2( 627, 14 )
 
 [node name="Fruits" type="Node2D" parent="."]
 

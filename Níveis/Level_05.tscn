@@ -31,7 +31,7 @@ export var reset_var : bool
 
 func _ready():
 	finished = false
-	next_scene = \"res://Níveis/Level_01.tscn\"
+	next_scene = \"res://Scenes/others/credits.tscn\"
 
 func reset():
 	reset_var = true
@@ -201,10 +201,10 @@ shape = SubResource( 1 )
 [node name="Players" type="Node2D" parent="."]
 
 [node name="Espeon" parent="Players" instance=ExtResource( 8 )]
-position = Vector2( 16, 332 )
+position = Vector2( 20, 338 )
 
 [node name="Umbreon" parent="Players" instance=ExtResource( 5 )]
-position = Vector2( 21, 26 )
+position = Vector2( 28, 28 )
 
 [node name="Fruits" type="Node2D" parent="."]
 

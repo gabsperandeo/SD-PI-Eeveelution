@@ -1,0 +1,377 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Scenes/others/TileMap.tscn" type="PackedScene" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Cores/daylight.png" type="Texture" id=3]
+[ext_resource path="res://Backgrounds/credits.png" type="Texture" id=4]
+[ext_resource path="res://Fonts/PublicPixel.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://Scenes/Umbreon.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Music/MusicTheme.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Espeon.tscn" type="PackedScene" id=8]
+
+[sub_resource type="Shader" id=29]
+code = "shader_type canvas_item;
+
+uniform sampler2D color_texture;
+
+void fragment()
+{
+	vec2 data = texture(SCREEN_TEXTURE, SCREEN_UV).rg;
+	if(data.g > 0.0)
+	{
+		discard;
+	}
+	
+	COLOR = texture(color_texture, vec2(data.r, 0.0));
+}"
+
+[sub_resource type="ShaderMaterial" id=30]
+shader = SubResource( 29 )
+shader_param/color_texture = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=33]
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_char = 2
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=32]
+size = 8
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_char = 1
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=31]
+size = 8
+outline_size = 1
+outline_color = Color( 0.27451, 0.25098, 0.25098, 1 )
+font_data = ExtResource( 5 )
+
+[node name="credits" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 319, 192 )
+scale = Vector2( 0.390238, 0.390238 )
+texture = ExtResource( 4 )
+
+[node name="TileMap" parent="." instance=ExtResource( 1 )]
+tile_data = PoolIntArray( 0, 12, 0, 1, 13, 0, 2, 13, 0, 3, 13, 0, 4, 13, 0, 5, 13, 0, 6, 13, 0, 7, 13, 0, 8, 13, 0, 9, 13, 0, 10, 13, 0, 11, 13, 0, 12, 13, 0, 13, 13, 0, 14, 13, 0, 15, 13, 0, 16, 13, 0, 17, 13, 0, 18, 13, 0, 19, 13, 0, 20, 13, 0, 21, 13, 0, 22, 13, 0, 23, 13, 0, 24, 13, 0, 25, 13, 0, 26, 13, 0, 27, 13, 0, 28, 13, 0, 29, 13, 0, 30, 13, 0, 31, 13, 0, 32, 13, 0, 33, 13, 0, 34, 13, 0, 35, 13, 0, 36, 13, 0, 37, 13, 0, 38, 13, 0, 39, 14, 0, 65536, 9, 0, 65575, 9, 0, 131072, 10, 0, 131111, 10, 0, 196608, 10, 0, 196647, 10, 0, 262144, 10, 0, 262147, 12, 0, 262148, 13, 0, 262149, 13, 0, 262150, 13, 0, 262151, 13, 0, 262152, 13, 0, 262153, 13, 0, 262154, 13, 0, 262155, 14, 0, 262183, 10, 0, 327680, 10, 0, 327697, 12, 0, 327698, 13, 0, 327699, 13, 0, 327700, 13, 0, 327701, 13, 0, 327702, 13, 0, 327703, 13, 0, 327704, 13, 0, 327705, 14, 0, 327719, 10, 0, 393216, 10, 0, 393245, 12, 0, 393246, 13, 0, 393247, 13, 0, 393248, 13, 0, 393249, 13, 0, 393250, 13, 0, 393251, 13, 0, 393252, 13, 0, 393253, 14, 0, 393255, 10, 0, 458752, 10, 0, 458791, 10, 0, 524288, 10, 0, 524327, 10, 0, 589824, 10, 0, 589839, 12, 0, 589840, 13, 0, 589841, 13, 0, 589842, 13, 0, 589843, 13, 0, 589844, 13, 0, 589845, 13, 0, 589846, 13, 0, 589847, 14, 0, 589863, 10, 0, 655360, 10, 0, 655362, 12, 0, 655363, 13, 0, 655364, 13, 0, 655365, 13, 0, 655366, 13, 0, 655367, 13, 0, 655368, 13, 0, 655369, 13, 0, 655370, 14, 0, 655390, 12, 0, 655391, 13, 0, 655392, 13, 0, 655393, 13, 0, 655394, 13, 0, 655395, 13, 0, 655396, 13, 0, 655397, 13, 0, 655398, 14, 0, 655399, 10, 0, 720896, 10, 0, 720935, 10, 0, 786432, 10, 0, 786471, 10, 0, 851968, 10, 0, 851989, 12, 0, 851990, 13, 0, 851991, 13, 0, 851992, 13, 0, 851993, 13, 0, 851994, 13, 0, 851995, 13, 0, 851996, 13, 0, 851997, 14, 0, 852007, 10, 0, 917504, 10, 0, 917543, 10, 0, 983040, 10, 0, 983048, 12, 0, 983049, 13, 0, 983050, 13, 0, 983051, 13, 0, 983052, 13, 0, 983053, 13, 0, 983054, 13, 0, 983055, 13, 0, 983056, 14, 0, 983067, 12, 0, 983068, 13, 0, 983069, 13, 0, 983070, 13, 0, 983071, 13, 0, 983072, 13, 0, 983073, 13, 0, 983074, 13, 0, 983075, 14, 0, 983079, 10, 0, 1048576, 10, 0, 1048615, 10, 0, 1114112, 10, 0, 1114151, 10, 0, 1179648, 10, 0, 1179666, 12, 0, 1179667, 13, 0, 1179668, 13, 0, 1179669, 13, 0, 1179670, 13, 0, 1179671, 13, 0, 1179672, 13, 0, 1179673, 13, 0, 1179674, 14, 0, 1179687, 10, 0, 1245184, 10, 0, 1245223, 10, 0, 1310720, 10, 0, 1310723, 12, 0, 1310724, 13, 0, 1310725, 13, 0, 1310726, 13, 0, 1310727, 13, 0, 1310728, 13, 0, 1310729, 13, 0, 1310730, 13, 0, 1310731, 14, 0, 1310749, 12, 0, 1310750, 13, 0, 1310751, 13, 0, 1310752, 13, 0, 1310753, 13, 0, 1310754, 13, 0, 1310755, 13, 0, 1310756, 13, 0, 1310757, 14, 0, 1310759, 10, 0, 1376256, 11, 0, 1376295, 11, 0, 1441792, 12, 0, 1441793, 13, 0, 1441794, 13, 0, 1441795, 13, 0, 1441796, 13, 0, 1441797, 13, 0, 1441798, 13, 0, 1441799, 13, 0, 1441800, 13, 0, 1441801, 13, 0, 1441802, 13, 0, 1441803, 13, 0, 1441804, 13, 0, 1441805, 13, 0, 1441806, 13, 0, 1441807, 13, 0, 1441808, 13, 0, 1441809, 13, 0, 1441810, 13, 0, 1441811, 13, 0, 1441812, 13, 0, 1441813, 13, 0, 1441814, 13, 0, 1441815, 13, 0, 1441816, 13, 0, 1441817, 13, 0, 1441818, 13, 0, 1441819, 13, 0, 1441820, 13, 0, 1441821, 13, 0, 1441822, 13, 0, 1441823, 13, 0, 1441824, 13, 0, 1441825, 13, 0, 1441826, 13, 0, 1441827, 13, 0, 1441828, 13, 0, 1441829, 13, 0, 1441830, 13, 0, 1441831, 14, 0 )
+
+[node name="Mask" type="Sprite" parent="."]
+material = SubResource( 30 )
+position = Vector2( 337, 179 )
+scale = Vector2( 11.3906, 6.6875 )
+texture = ExtResource( 2 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="CREDITS" type="RichTextLabel" parent="Control"]
+margin_left = 275.0
+margin_top = 12.0
+margin_right = 437.0
+margin_bottom = 54.0
+rect_pivot_offset = Vector2( 42, 13 )
+custom_fonts/normal_font = SubResource( 33 )
+bbcode_enabled = true
+bbcode_text = "[rainbow freq=4 sat=0.6][tornado amp=80 freq=2]CREDITS"
+text = "CREDITS"
+
+[node name="Tutorials" type="RichTextLabel" parent="Control"]
+margin_left = 305.0
+margin_top = 84.0
+margin_right = 411.0
+margin_bottom = 97.0
+rect_pivot_offset = Vector2( 42, 13 )
+custom_fonts/normal_font = SubResource( 32 )
+bbcode_enabled = true
+bbcode_text = "[rainbow freq=2 sat=0.4][shake amp=80 freq=2]Tutorials"
+text = "Tutorials"
+
+[node name="Tutorials2" type="RichTextLabel" parent="Control"]
+margin_left = 265.0
+margin_top = 52.0
+margin_right = 444.0
+margin_bottom = 86.0
+custom_fonts/normal_font = SubResource( 31 )
+bbcode_enabled = true
+bbcode_text = "[rainbow freq=2 sat=0.15]-Clécio Espindola
+  GameDev (Youtube)
+-Godot Documentation"
+text = "-Clécio Espindola
+  GameDev (Youtube)
+-Godot Documentation"
+
+[node name="Level Design" type="RichTextLabel" parent="Control"]
+margin_left = 480.0
+margin_top = 98.0
+margin_right = 588.0
+margin_bottom = 114.0
+rect_pivot_offset = Vector2( 100, 16 )
+custom_fonts/normal_font = SubResource( 32 )
+bbcode_enabled = true
+bbcode_text = "[rainbow freq=2 sat=0.4][shake amp=80 freq=2]Level Design"
+text = "Level Design"
+
+[node name="Level Design2" type="RichTextLabel" parent="Control"]
+margin_left = 458.0
+margin_top = 77.0
+margin_right = 626.0
+margin_bottom = 108.0
+rect_pivot_offset = Vector2( 212, 85 )
+custom_fonts/normal_font = SubResource( 31 )
+bbcode_enabled = true
+bbcode_text = "[rainbow freq=2 sat=0.15]-Felipe R. Oliveira
+-Gabrielle Sperandeo"
+text = "-Felipe R. Oliveira
+-Gabrielle Sperandeo"
+
+[node name="Support Team" type="RichTextLabel" parent="Control"]
+margin_left = 48.0
+margin_top = 163.0
+margin_right = 156.0
+margin_bottom = 179.0
+rect_pivot_offset = Vector2( 100, 16 )
+custom_fonts/normal_font = SubResource( 32 )
+bbcode_enabled = true
+bbcode_text = "[rainbow freq=2 sat=0.4][shake amp=80 freq=2]Support Team"
+text = "Support Team"
+
+[node name="Support Team2" type="RichTextLabel" parent="Control"]
+margin_left = 21.0
+margin_top = 122.0
+margin_right = 230.0
+margin_bottom = 173.0
+custom_fonts/normal_font = SubResource( 31 )
+bbcode_enabled = true
+bbcode_text = "[rainbow freq=2 sat=0.15]-Felipe R. Oliveira
+-Gabriel T. Ramos
+-Isaque A. M. Oliveira
+Luis Fernando F Batista"
+text = "-Felipe R. Oliveira
+-Gabriel T. Ramos
+-Isaque A. M. Oliveira
+Luis Fernando F Batista"
+
+[node name="Game Developers" type="RichTextLabel" parent="Control"]
+margin_left = 242.0
+margin_top = 147.0
+margin_right = 385.0
+margin_bottom = 163.0
+rect_pivot_offset = Vector2( 100, 16 )
+custom_fonts/normal_font = SubResource( 32 )
+bbcode_enabled = true
+bbcode_text = "[rainbow freq=2 sat=0.4][shake amp=80 freq=2]Game Developers"
+text = "Game Developers"
+
+[node name="Game Developers2" type="RichTextLabel" parent="Control"]
+margin_left = 234.0
+margin_top = 125.0
+margin_right = 413.0
+margin_bottom = 159.0
+custom_fonts/normal_font = SubResource( 31 )
+bbcode_enabled = true
+bbcode_text = "[rainbow freq=2 sat=0.15]-Gabrielle Sperandeo
+-Carlos G. A. Santos"
+text = "-Gabrielle Sperandeo
+-Carlos G. A. Santos"
+
+[node name="Game Inspiration" type="RichTextLabel" parent="Control"]
+margin_left = 46.0
+margin_top = 68.0
+margin_right = 208.0
+margin_bottom = 84.0
+custom_fonts/normal_font = SubResource( 32 )
+bbcode_enabled = true
+bbcode_text = "[rainbow freq=2 sat=0.4][shake amp=80 freq=2]Game Inspiration"
+text = "Game Inspiration"
+
+[node name="Game Inspiration2" type="RichTextLabel" parent="Control"]
+margin_left = 45.0
+margin_top = 51.0
+margin_right = 200.0
+margin_bottom = 68.0
+rect_pivot_offset = Vector2( 103, 86 )
+custom_fonts/normal_font = SubResource( 31 )
+bbcode_enabled = true
+bbcode_text = "[rainbow freq=2 sat=0.15
+]Fireboy & Watergirl"
+text = "Fireboy & Watergirl"
+
+[node name="Background Music" type="RichTextLabel" parent="Control"]
+margin_left = 335.0
+margin_top = 212.0
+margin_right = 481.0
+margin_bottom = 226.0
+rect_pivot_offset = Vector2( 100, 16 )
+custom_fonts/normal_font = SubResource( 32 )
+bbcode_enabled = true
+bbcode_text = "[rainbow freq=2 sat=0.4][shake amp=80 freq=2]Background Music"
+text = "Background Music"
+
+[node name="Background Music2" type="RichTextLabel" parent="Control"]
+margin_left = 333.0
+margin_top = 189.0
+margin_right = 497.0
+margin_bottom = 211.0
+rect_pivot_offset = Vector2( 103, 86 )
+custom_fonts/normal_font = SubResource( 31 )
+bbcode_enabled = true
+bbcode_text = "[rainbow freq=2 sat=0.15
+]Guilherme Apolinário
+  Silva Novaes"
+text = "Guilherme Apolinário
+  Silva Novaes"
+
+[node name="Level Background" type="RichTextLabel" parent="Control"]
+margin_left = 129.0
+margin_top = 240.0
+margin_right = 275.0
+margin_bottom = 256.0
+rect_pivot_offset = Vector2( 100, 16 )
+custom_fonts/normal_font = SubResource( 32 )
+bbcode_enabled = true
+bbcode_text = "[rainbow freq=2 sat=0.4][shake amp=80 freq=2]Level Background"
+text = "Level Background"
+
+[node name="Level Background2" type="RichTextLabel" parent="Control"]
+margin_left = 128.0
+margin_top = 200.0
+margin_right = 276.0
+margin_bottom = 243.0
+rect_pivot_offset = Vector2( 103, 86 )
+custom_fonts/normal_font = SubResource( 31 )
+bbcode_enabled = true
+bbcode_text = "[rainbow freq=2 sat=0.15
+]- Pinterest
+- CuteWallpaper
+- WallHaven
+- Wall AlphaCoders"
+text = "- Pinterest
+- CuteWallpaper
+- WallHaven
+- Wall AlphaCoders"
+
+[node name="Sprites Umbreon" type="RichTextLabel" parent="Control"]
+margin_left = 468.0
+margin_top = 320.0
+margin_right = 608.0
+margin_bottom = 336.0
+rect_pivot_offset = Vector2( 100, 16 )
+custom_fonts/normal_font = SubResource( 32 )
+bbcode_enabled = true
+bbcode_text = "[rainbow freq=2 sat=0.4][shake amp=80 freq=2]Sprites Umbreon"
+text = "Sprites Umbreon"
+
+[node name="Sprites Umbreon2" type="RichTextLabel" parent="Control"]
+margin_left = 288.0
+margin_top = 268.0
+margin_right = 445.0
+margin_bottom = 289.0
+custom_fonts/normal_font = SubResource( 31 )
+bbcode_enabled = true
+bbcode_text = "[rainbow freq=2 sat=0.15]    Chunsoft
+(Sprites pmdcollab)"
+text = "    Chunsoft
+(Sprites pmdcollab)"
+
+[node name="Sprites Espeon" type="RichTextLabel" parent="Control"]
+margin_left = 299.0
+margin_top = 290.0
+margin_right = 441.0
+margin_bottom = 306.0
+rect_pivot_offset = Vector2( 100, 16 )
+custom_fonts/normal_font = SubResource( 32 )
+bbcode_enabled = true
+bbcode_text = "[rainbow freq=2 sat=0.4][shake amp=80 freq=2]Sprites Espeon"
+text = "Sprites Espeon"
+
+[node name="Sprites Espeon2" type="RichTextLabel" parent="Control"]
+margin_left = 461.0
+margin_top = 290.0
+margin_right = 631.0
+margin_bottom = 332.0
+custom_fonts/normal_font = SubResource( 31 )
+bbcode_enabled = true
+bbcode_text = "[rainbow freq=2 sat=0.15]    - Chunsoft
+ - JFain Emmuffin
+(Sprites pmdcollab)"
+text = "    - Chunsoft
+ - JFain Emmuffin
+(Sprites pmdcollab)"
+
+[node name="Sprites Berries" type="RichTextLabel" parent="Control"]
+margin_left = 439.0
+margin_top = 241.0
+margin_right = 581.0
+margin_bottom = 257.0
+rect_pivot_offset = Vector2( 83, 16 )
+custom_fonts/normal_font = SubResource( 32 )
+bbcode_enabled = true
+bbcode_text = "[rainbow freq=2 sat=0.4][shake amp=80 freq=2]Sprites Berries"
+text = "Sprites Berries"
+
+[node name="Sprites Berries2" type="RichTextLabel" parent="Control"]
+margin_left = 459.0
+margin_top = 227.0
+margin_right = 556.0
+margin_bottom = 242.0
+custom_fonts/normal_font = SubResource( 31 )
+bbcode_enabled = true
+bbcode_text = "[rainbow freq=2 sat=0.15]Bulbapedia"
+text = "Bulbapedia"
+
+[node name="Sound Effects" type="RichTextLabel" parent="Control"]
+margin_left = 492.0
+margin_top = 165.0
+margin_right = 634.0
+margin_bottom = 181.0
+rect_pivot_offset = Vector2( 83, 16 )
+custom_fonts/normal_font = SubResource( 32 )
+bbcode_enabled = true
+bbcode_text = "[rainbow freq=2 sat=0.4][shake amp=80 freq=2]Sound Effects"
+text = "Sound Effects"
+
+[node name="Sound Effects2" type="RichTextLabel" parent="Control"]
+margin_left = 506.0
+margin_top = 151.0
+margin_right = 603.0
+margin_bottom = 166.0
+custom_fonts/normal_font = SubResource( 31 )
+bbcode_enabled = true
+bbcode_text = "[rainbow freq=2 sat=0.15]OpenGameArt"
+text = "OpenGameArt"
+
+[node name="Other Sprites" type="RichTextLabel" parent="Control"]
+margin_left = 61.0
+margin_top = 322.0
+margin_right = 203.0
+margin_bottom = 338.0
+rect_pivot_offset = Vector2( 83, 16 )
+custom_fonts/normal_font = SubResource( 32 )
+bbcode_enabled = true
+bbcode_text = "[rainbow freq=2 sat=0.4][shake amp=80 freq=2]Other Sprites"
+text = "Other Sprites"
+
+[node name="Other Sprites2" type="RichTextLabel" parent="Control"]
+margin_left = 48.0
+margin_top = 307.0
+margin_right = 220.0
+margin_bottom = 321.0
+custom_fonts/normal_font = SubResource( 31 )
+bbcode_enabled = true
+bbcode_text = "[rainbow freq=2 sat=0.15]Carlos G. A. Santos"
+text = "Carlos G. A. Santos"
+
+[node name="Music" parent="." instance=ExtResource( 7 )]
+pitch_scale = 2.0
+
+[node name="Players" type="Node2D" parent="."]
+
+[node name="Espeon" parent="Players" instance=ExtResource( 8 )]
+position = Vector2( 296, 259 )
+
+[node name="Umbreon" parent="Players" instance=ExtResource( 6 )]
+position = Vector2( 599, 282 )
